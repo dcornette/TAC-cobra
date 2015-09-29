@@ -1,5 +1,5 @@
 var cobra = new Cobra();
-var room = "test";
+var room = "friend-event";
 var socketId;
 var apiUrl = 'http://cobra-framework.com:3000/api/events/' + room;
 cobra.connect('http://cobra-framework.com:8080');
@@ -54,12 +54,4 @@ cobra.messageReceivedCallback = function (message) {
         // Message reçu, je le traite
         console.log(message.message);
     }
-}
-
-cobra.clientJoinedRoomCallback = function(data){
-    // Un autre client a rejoint la room
-}
-
-cobra.clientLeftRoomCallback = function(data){
-    // Un client a quitté la room
 }

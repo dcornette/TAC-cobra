@@ -1,8 +1,3 @@
-/**
- * Created by michel.dirix on 29/07/15.
- */
-
-
 
 function Cobra(){
     this.url = null;
