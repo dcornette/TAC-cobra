@@ -3,16 +3,13 @@ Projet gestion d'événements entre amis
 
 ## How to install
 
-1. Install npm
-
+### Install npm
 Go to [NodeJs Website !](https://nodejs.org/en/download/)
 
-2. Install Bower
-
+### Install Bower
 `npm install -g bower`
 
-3. Install vendors
-
+### Install vendors
 To your root project :
 
 `bower install`
