@@ -1,0 +1,10 @@
+.nav-sidebar > li > strong {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.nav-sidebar>li>a {
+    position: relative;
+    display: block;
+    padding: 5px 15px;
+}

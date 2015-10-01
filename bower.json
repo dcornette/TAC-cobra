@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.5",
+    "bootstrap-dashboard": "http://getbootstrap.com/examples/dashboard/dashboard.css",
     "socket.io": "https://github.com/socketio/socket.io-client.git"
   }
 }

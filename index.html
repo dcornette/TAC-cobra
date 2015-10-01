@@ -5,6 +5,8 @@
     <title>Cobra minimal</title>
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap-dashboard/index.css">
+    <link rel="stylesheet" href="public/css/main.css">
 </head>
 <body>
 
@@ -13,10 +15,30 @@
             <div class="navbar-header">
                 <a href="#" class="navbar-brand">Hey Damien !</a>
             </div>
-            <div id="navbar" class="navbar-collapse collapse"></div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Créer un événement</a></li>
+                    <li><a href="#">Deconnexion</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
-    <div class="container-fluid"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li><strong>MES EVENEMENTS</strong></li>
+                    <li class="active"><a href="#">Pizza party</a></li>
+                    <li><a href="#">Soirée chez Jacqueline</a></li>
+                    <li><a href="#">Footing</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><strong>MES INVITATIONS</strong></li>
+                    <li><a href="">Festival de Dour</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="vendor/jquery/dist/jquery.min.js"></script>

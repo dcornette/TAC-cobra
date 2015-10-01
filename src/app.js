@@ -6,7 +6,7 @@ cobra.connect('http://cobra-framework.com:8080');
 
 cobra.connectionCallback = function () {
     cobra.joinRoom(room);
-}
+};
 
 cobra.joinRoomCallback = function (roomName) {
     // appel à l'API pour récupérer tous les messages de la room roomName
@@ -22,6 +22,7 @@ cobra.joinRoomCallback = function (roomName) {
         },
 
         complete: function (result, status) {
+            console.log(result);
             console.log("complete");
             for (var i = 0; i < result.responseJSON.Events.length; i++) {
                 var content = result.responseJSON.Events[i].content;
@@ -36,9 +37,14 @@ cobra.joinRoomCallback = function (roomName) {
             // cobra.sendMessage({content : "test"}, room, false);
         }
     });
-}
+};
 
 cobra.messageReceivedCallback = function (message) {
+
+
+
+    console.log(message);
+
     // Lors de l'arrivée dans une room donne la liste des utilisateurs contenus dans la room
     if(message.type == "infos"){
         for(var i = 0; i < message.clients.length; i++)
@@ -54,4 +60,4 @@ cobra.messageReceivedCallback = function (message) {
         // Message reçu, je le traite
         console.log(message.message);
     }
-}
+};
