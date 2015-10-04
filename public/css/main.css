@@ -8,3 +8,20 @@
     display: block;
     padding: 5px 15px;
 }
+
+#loginPage {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background-color: #eee;
+    z-index: 9999;
+}
+
+
+#connectedPage {
+    display: none;
+}
+
+.scrollBar {
+    height: 200px;
+    overflow-x: scroll;
+}

@@ -18,7 +18,7 @@ Cobra.prototype.connect = function(url){
     });
 
     this.socket.on("message", function(msg) {
-        console.log("message : " + JSON.stringify(msg));
+        //console.log("message : " + JSON.stringify(msg));
         if(msg.type == "infos") {
             self.socket.id = msg.socketId;
         }
@@ -49,6 +49,20 @@ Cobra.prototype.sendMessage = function(message, roomName, toAll) {
     }
 };
 
+Cobra.prototype.clientJoinedRoomCallback = function(data){
+    console.log("client " + data.id + " joint room " + data.room);
+    console.log(JSON.stringify(data.clients));
+};
+
+Cobra.prototype.clientLeftRoomCallback = function(data){
+    console.log("client " + data.id + " left room " + data.room);
+};
+
+/**
+ * #####################################
+ * Overriden methods by FriendEventCobra
+ * #####################################
+ */
 Cobra.prototype.connectionCallback = function(){
     console.log("connected");
 };
@@ -59,13 +73,4 @@ Cobra.prototype.messageReceivedCallback = function(msg){
 
 Cobra.prototype.joinRoomCallback = function(roomName){
     console.log("You joined the room " + roomName);
-};
-
-Cobra.prototype.clientJoinedRoomCallback = function(data){
-    console.log("client " + data.id + " joint room " + data.room);
-    console.log(JSON.stringify(data.clients));
-};
-
-Cobra.prototype.clientLeftRoomCallback = function(data){
-    console.log("client " + data.id + " left room " + data.room);
 };

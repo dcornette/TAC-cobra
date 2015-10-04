@@ -10,32 +10,105 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="#" class="navbar-brand">Hey Damien !</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Créer un événement</a></li>
-                    <li><a href="#">Deconnexion</a></li>
-                </ul>
+    <div id="loginPage">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <h2 class="text-center">Identifiez-vous</h2>
+                    <div class="scrollBar">
+                        <div id="userList" class="list-group">
+                        </div>
+                    </div>
+                    <div class="createUser">
+                        <h2 class="text-center">Ou créez un nouvel utilisateur</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="username">Nom utilisateur</label>
+                                <input type="text" class="form-control" id="username" placeholder="Nom">
+                            </div>
+                            <button id="createUser" type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li><strong>MES EVENEMENTS</strong></li>
-                    <li class="active"><a href="#">Pizza party</a></li>
-                    <li><a href="#">Soirée chez Jacqueline</a></li>
-                    <li><a href="#">Footing</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><strong>MES INVITATIONS</strong></li>
-                    <li><a href="">Festival de Dour</a></li>
-                </ul>
+    </div>
+
+    <div id="connectedPage">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand"></a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Créer un événement</a></li>
+                        <li><a href="#">Deconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li><strong>MES EVENEMENTS</strong></li>
+                        <!--<li class="active"><a href="#">Pizza party</a></li>-->
+                        <li><a href="#">Footing</a></li>
+                    </ul>
+                    <ul class="nav nav-sidebar">
+                        <li><strong>MES INVITATIONS</strong></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <div class="createEvent">
+                        <h2 class="text-center">Créer un événement</h2>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="eventName" class="col-sm-2 control-label">Nom</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="eventName" placeholder="Nom">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDescription" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" id="eventDescription"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventWhere" class="col-sm-2 control-label">Ou ?</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="eventWhere" placeholder="Ou ?">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventWhen" class="col-sm-2 control-label">Quand ?</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="eventWhen" placeholder="Quand ?">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventWhat" class="col-sm-2 control-label">Quoi ?</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="eventWhat" placeholder="Quoi ?">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventWho" class="col-sm-2 control-label">Qui ?</label>
+                                <div class="col-sm-10">
+                                    <select multiple class="form-control" id="eventWho">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button id="createEvent" type="submit" class="btn btn-primary">Créer événement</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -44,7 +117,13 @@
     <script src="vendor/jquery/dist/jquery.min.js"></script>
     <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendor/socket.io/socket.io.js"></script>
+    <script src="src/class/User.js"></script>
+    <script src="src/class/Event.js"></script>
     <script src="src/class/cobra.js"></script>
-    <script src="src/app.js"></script>
+    <script src="src/class/FriendEventCobra.js"></script>
+    <script src="src/FriendEvent.js"></script>
+    <script>
+        new FriendEvent();
+    </script>
 </body>
 </html>
