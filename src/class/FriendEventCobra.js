@@ -187,8 +187,10 @@ FriendEventCobra.prototype.fetchDatas = function () {
                             a.addEventListener('click', function(e) {
 
                                 var targetEvent = $this.getEventByName(e.target.innerHTML);
-
                                 targetEvent.show();
+
+                                $this.removeActiveClassToLiElement(leftSidebar.firstElementChild);
+                                $this.removeActiveClassToLiElement(leftSidebar.lastElementChild);
 
                                 e.target.parentNode.setAttribute('class', 'active');
                             });
@@ -197,8 +199,10 @@ FriendEventCobra.prototype.fetchDatas = function () {
                             a.addEventListener('click', function(e) {
 
                                 var targetEvent = $this.getEventByName(e.target.innerHTML);
-
                                 targetEvent.show();
+
+                                $this.removeActiveClassToLiElement(leftSidebar.firstElementChild);
+                                $this.removeActiveClassToLiElement(leftSidebar.lastElementChild);
 
                                 e.target.parentNode.setAttribute('class', 'active');
                             });
@@ -242,6 +246,18 @@ FriendEventCobra.prototype.getUserByName = function (userName) {
         return users[0];
     } else {
         return null;
+    }
+};
+
+/**
+ * Supprime la classe active sur les lien de la sidebar
+ * @param ul
+ */
+FriendEventCobra.prototype.removeActiveClassToLiElement = function (ul) {
+    for (var i=0; i<ul.children.length; i++) {
+        if (ul.children[i].classList.contains('active')) {
+            ul.children[i].classList.remove('active');
+        }
     }
 };
 
