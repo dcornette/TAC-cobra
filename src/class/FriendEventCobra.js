@@ -17,8 +17,15 @@ FriendEventCobra.prototype.init = function(roomName) {
     this.room = roomName;
     this.dataUrl = 'http://cobra-framework.com:3000/api/events/' + roomName;
     document.getElementById('createUser').addEventListener('click', function(event) {
+        event.preventDefault();
         var userName = document.getElementById('username').value;
         $this.createUser(userName);
+    });
+    document.querySelector('#navbar li').addEventListener('click', function (event) {
+        document.getElementById('createMyEvent').style.display = 'inline';
+        document.getElementById('myEvent').style.display = 'none';
+        $this.removeActiveClassToLiElement(document.getElementById('left-sidebar').firstElementChild);
+        $this.removeActiveClassToLiElement(document.getElementById('left-sidebar').lastElementChild);
     });
 };
 
@@ -61,24 +68,10 @@ FriendEventCobra.prototype.initCobra = function() {
                 for (var i = 0; i < result.responseJSON.Events.length; i++) {
                     var content = JSON.parse(result.responseJSON.Events[i].content);
 
-                    if (content.message.action === 'createUser' && content.message.data.name != null) {
-
+                    if (content.message.action === 'createUser' && content.message.data.name != null
+                        && content.message.data.name != "") {
                         var user = new User(content.message.data.name);
-
-                        if ($this.getUserByName(user.name) === null) {
-
-                            $this.users.push(user);
-
-                            var a = document.createElement('a');
-                            a.setAttribute('href', '#');
-                            a.setAttribute('class', 'list-group-item');
-                            a.innerHTML = user.name;
-                            document.getElementById('userList').appendChild(a);
-                            a.addEventListener('click', function(event) {
-                                var user = $this.getUserByName(event.target.innerHTML);
-                                user.connect($this);
-                            });
-                        }
+                        user.processCreateUser($this);
                     }
                 }
             }
@@ -93,34 +86,39 @@ FriendEventCobra.prototype.initCobra = function() {
 
         // Lors de l'arrivée dans une room donne la liste des utilisateurs contenus dans la room
         if(message.type == "infos") {
-            for(var i = 0; i < message.clients.length; i++)
-            {
-                // Contient l'id du client
-                var client = message.clients[i];
-
-            }
-            // Mon id attribué par la room
+            for(var i = 0; i < message.clients.length; i++) {var client = message.clients[i];}
             $this.socketId = message.socketId;
         } else if (message.message) {
 
-            if (message.message.action === 'createUser' && message.message.data.name != null) {
-
+            /**
+             * Process createUser message
+             */
+            if (message.message.action === 'createUser' && message.message.data.name != null
+                && message.message.data.name != "") {
                 var user = new User(message.message.data.name);
-
-                if ($this.getUserByName(user.name) === null) {
-
-                    $this.users.push(user);
-
-                    var a = document.createElement('a');
-                    a.setAttribute('href', '#');
-                    a.setAttribute('class', 'list-group-item');
-                    a.innerHTML = user.name;
-                    document.getElementById('userList').appendChild(a);
-                    a.addEventListener('click', function () {
-                        $this.getUserByName(user.name).connect($this);
-                    });
-                }
+                user.processCreateUser($this);
             }
+
+            /**
+             * Process createEvent message
+             */
+            if (message.message.action === 'createEvent' && message.message.data.name != null
+                && message.message.data.name != "") {
+
+                var eventObject = message.message.data;
+
+                var event = new Event(
+                    eventObject.name,
+                    eventObject.description,
+                    eventObject.where,
+                    eventObject.when,
+                    eventObject.what,
+                    eventObject.who,
+                    eventObject.promoter
+                );
+                event.processCreateEvent($this);
+            }
+
         }
     };
 };
@@ -158,7 +156,8 @@ FriendEventCobra.prototype.fetchDatas = function () {
             for (var i = 0; i < result.responseJSON.Events.length; i++) {
                 var content = JSON.parse(result.responseJSON.Events[i].content);
 
-                if (content.message.action === 'createEvent' && content.message.data.name != null) {
+                if (content.message.action === 'createEvent' && content.message.data.name != null
+                    && content.message.data.name != "") {
 
                     var event = new Event(
                         content.message.data.name,
@@ -169,46 +168,7 @@ FriendEventCobra.prototype.fetchDatas = function () {
                         content.message.data.who,
                         content.message.data.promoter
                     );
-
-                    if ($this.getEventByName(event.name) === null) {
-                        $this.events.push(event);
-
-                        var a = document.createElement('a');
-                        a.setAttribute('href', '#');
-                        a.innerHTML = event.name;
-
-                        var li = document.createElement('li');
-                        li.appendChild(a);
-
-                        var leftSidebar = document.getElementById('left-sidebar');
-
-                        if ($this.me.name === event.promoter.name) {
-                            leftSidebar.firstElementChild.appendChild(li);
-                            a.addEventListener('click', function(e) {
-
-                                var targetEvent = $this.getEventByName(e.target.innerHTML);
-                                targetEvent.show();
-
-                                $this.removeActiveClassToLiElement(leftSidebar.firstElementChild);
-                                $this.removeActiveClassToLiElement(leftSidebar.lastElementChild);
-
-                                e.target.parentNode.setAttribute('class', 'active');
-                            });
-                        } else if (event.who.indexOf($this.me.name) != -1) {
-                            leftSidebar.lastElementChild.appendChild(li);
-                            a.addEventListener('click', function(e) {
-
-                                var targetEvent = $this.getEventByName(e.target.innerHTML);
-                                targetEvent.show();
-
-                                $this.removeActiveClassToLiElement(leftSidebar.firstElementChild);
-                                $this.removeActiveClassToLiElement(leftSidebar.lastElementChild);
-
-                                e.target.parentNode.setAttribute('class', 'active');
-                            });
-                        }
-
-                    }
+                    event.processCreateEvent($this);
                 }
             }
         }
@@ -250,7 +210,7 @@ FriendEventCobra.prototype.getUserByName = function (userName) {
 };
 
 /**
- * Supprime la classe active sur les lien de la sidebar
+ * Remove active class on sidebar links
  * @param ul
  */
 FriendEventCobra.prototype.removeActiveClassToLiElement = function (ul) {
@@ -260,7 +220,3 @@ FriendEventCobra.prototype.removeActiveClassToLiElement = function (ul) {
         }
     }
 };
-
-
-
-

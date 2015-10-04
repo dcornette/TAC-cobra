@@ -10,6 +10,52 @@ function Event(name, description, where, when, what, who, promoter) {
 }
 
 /**
+ * Process create Event
+ * @param friendEventCobra
+ */
+Event.prototype.processCreateEvent = function (friendEventCobra) {
+
+    if (friendEventCobra.getEventByName(this.name) === null) {
+        friendEventCobra.events.push(this);
+
+        var a = document.createElement('a');
+        a.setAttribute('href', '#');
+        a.innerHTML = this.name;
+
+        var li = document.createElement('li');
+        li.appendChild(a);
+
+        var leftSidebar = document.getElementById('left-sidebar');
+
+        if (friendEventCobra.me.name === this.promoter.name) {
+            leftSidebar.firstElementChild.appendChild(li);
+            a.addEventListener('click', function(e) {
+
+                var targetEvent = friendEventCobra.getEventByName(e.target.innerHTML);
+                targetEvent.show();
+
+                friendEventCobra.removeActiveClassToLiElement(leftSidebar.firstElementChild);
+                friendEventCobra.removeActiveClassToLiElement(leftSidebar.lastElementChild);
+
+                e.target.parentNode.setAttribute('class', 'active');
+            });
+        } else if (this.who.indexOf(friendEventCobra.me.name) != -1) {
+            leftSidebar.lastElementChild.appendChild(li);
+            a.addEventListener('click', function(e) {
+
+                var targetEvent = friendEventCobra.getEventByName(e.target.innerHTML);
+                targetEvent.show();
+
+                friendEventCobra.removeActiveClassToLiElement(leftSidebar.firstElementChild);
+                friendEventCobra.removeActiveClassToLiElement(leftSidebar.lastElementChild);
+
+                e.target.parentNode.setAttribute('class', 'active');
+            });
+        }
+    }
+};
+
+/**
  * Affiche l'écran d'un événement
  */
 Event.prototype.show = function () {
