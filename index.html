@@ -43,25 +43,23 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Créer un événement</a></li>
-                        <li><a href="#">Deconnexion</a></li>
+                        <li><a href="index.html">Deconnexion</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
+                <div id="left-sidebar" class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
                         <li><strong>MES EVENEMENTS</strong></li>
-                        <!--<li class="active"><a href="#">Pizza party</a></li>-->
-                        <li><a href="#">Footing</a></li>
                     </ul>
                     <ul class="nav nav-sidebar">
                         <li><strong>MES INVITATIONS</strong></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <div class="createEvent">
+                    <div id="createMyEvent" class="createEvent">
                         <h2 class="text-center">Créer un événement</h2>
                         <form class="form-horizontal">
                             <div class="form-group">
@@ -107,6 +105,23 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+
+                    <div id="myEvent">
+                        <div class="col-md-8">
+                            <h2 id="myEventName"></h2>
+                            <p id="myEventDescription"></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+                            <h3>Ou ?</h3>
+                            <p id="myEventWhere"></p>
+                            <h3>Quand ?</h3>
+                            <p id="myEventWhen"></p>
+                            <h3>Quoi ?</h3>
+                            <p id="myEventWhat"></p>
+                            <h3>Qui ?</h3>
+                            <div id="myEventWho"></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -25,3 +25,7 @@
     height: 200px;
     overflow-x: scroll;
 }
+
+#myEvent {
+    display: none;
+}
