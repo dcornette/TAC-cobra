@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "homepage": "https://github.com/dcornette/TAC-cobra",
   "authors": [
-    "Damien Cornette <damien.cornette@gmail.com>"
+    "Damien Cornette <damien.cornette@gmail.com>",
+    "Sebastien Joly <seb.joly21@gmail.com>"
   ],
   "description": "",
   "main": "",
@@ -15,7 +16,8 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "vendor"
   ],
   "dependencies": {
     "bootstrap": "~3.3.5",
