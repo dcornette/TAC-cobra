@@ -114,16 +114,10 @@
                             <p id="myEventDescription"></p>
                         </div>
 
-                        <div id="chat_wrapper" class="col-md-8">
+                        <div id="chat_wrapper" class="col-md-9">
                             <div id="message_box"></div>
                             <div class="panel">
-                                <form class="form-inline">
-                                    <div class="form-group col-md-10">
-                                        <label class="sr-only" for="messageInput">Votre message</label>
-                                        <input type="text" class="form-control" id="messageInput" placeholder="Votre message">
-                                    </div>
-                                    <button id="sendMessage" type="submit" class="btn btn-primary">Entrer</button>
-                                </form>
+                                <input type="text" class="form-control" id="messageInput" placeholder="Votre message">
                             </div>
                         </div>
 
@@ -149,6 +143,7 @@
     <script src="vendor/socket.io/socket.io.js"></script>
     <script src="src/class/User.js"></script>
     <script src="src/class/Event.js"></script>
+    <script src="src/class/Message.js"></script>
     <script src="src/class/cobra.js"></script>
     <script src="src/class/FriendEventCobra.js"></script>
     <script src="src/FriendEvent.js"></script>

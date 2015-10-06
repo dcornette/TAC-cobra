@@ -10,6 +10,7 @@ function Event(name, description, where, when, what, who, promoter) {
     this.what = what;
     this.who = who;
     this.promoter = promoter;
+    this.messages = [];
 }
 
 /**
@@ -35,19 +36,19 @@ Event.prototype.processCreateEvent = function (friendEvent) {
             a.addEventListener('click', function(e) {
 
                 var targetEvent = friendEvent.getEventByName(e.target.innerHTML);
-                targetEvent.show();
+                targetEvent.show(friendEvent);
 
                 friendEvent.removeActiveClassToLiElement(leftSidebar.firstElementChild);
                 friendEvent.removeActiveClassToLiElement(leftSidebar.lastElementChild);
 
                 e.target.parentNode.setAttribute('class', 'active');
             });
-        } else if (this.who.indexOf(friendEventCobra.me.name) != -1) {
+        } else if (this.who.indexOf(friendEvent.me.name) != -1) {
             leftSidebar.lastElementChild.appendChild(li);
             a.addEventListener('click', function(e) {
 
                 var targetEvent = friendEvent.getEventByName(e.target.innerHTML);
-                targetEvent.show();
+                targetEvent.show(friendEvent);
 
                 friendEvent.removeActiveClassToLiElement(leftSidebar.firstElementChild);
                 friendEvent.removeActiveClassToLiElement(leftSidebar.lastElementChild);
@@ -59,9 +60,10 @@ Event.prototype.processCreateEvent = function (friendEvent) {
 };
 
 /**
- * Affiche l'écran d'un événement
+ * Show event page
+ * @param friendEvent
  */
-Event.prototype.show = function () {
+Event.prototype.show = function (friendEvent) {
     document.getElementById('createMyEvent').style.display = 'none';
     document.getElementById('myEvent').style.display = 'inline';
     document.getElementById('myEventName').innerHTML = this.name;
@@ -77,4 +79,12 @@ Event.prototype.show = function () {
     });
     document.getElementById('myEventWho').innerHTML = '';
     document.getElementById('myEventWho').appendChild(ul);
+
+    friendEvent.activeEvent = this;
+
+    document.getElementById('message_box').innerHTML = '';
+
+    this.messages.forEach(function (element, index, array) {
+        element.show();
+    });
 };

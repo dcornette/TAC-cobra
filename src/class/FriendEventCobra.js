@@ -10,6 +10,11 @@ function FriendEventCobra() {
     this.socketId = null;
 }
 
+/**
+ * Init Cobra configuration
+ * @param friendEvent
+ * @param roomName
+ */
 FriendEventCobra.prototype.init = function(friendEvent, roomName) {
     this.friendEvent = friendEvent;
     this.room = roomName;
@@ -66,6 +71,9 @@ FriendEventCobra.prototype.initCobra = function() {
                 for (var i = 0; i < result.responseJSON.Events.length; i++) {
                     var content = JSON.parse(result.responseJSON.Events[i].content);
 
+                    /**
+                     * Process createUser message
+                     */
                     if (content.message.action === 'createUser' && content.message.data.name != null
                         && content.message.data.name != "") {
                         var user = new User(content.message.data.name);
@@ -117,6 +125,21 @@ FriendEventCobra.prototype.initCobra = function() {
                 event.processCreateEvent($this.friendEvent);
             }
 
+            /**
+             * Process sendMessage message
+             */
+            if (message.message.action === 'sendMessage' && message.message.data.message != null
+                && message.message.data.message != "") {
+
+                var messageObject = message.message.data;
+
+                var msg = new Message(
+                    messageObject.sender,
+                    messageObject.message,
+                    messageObject.eventName
+                );
+                msg.processSendMessage($this.friendEvent);
+            }
         }
     };
 };
@@ -139,6 +162,9 @@ FriendEventCobra.prototype.fetchDatas = function () {
             for (var i = 0; i < result.responseJSON.Events.length; i++) {
                 var content = JSON.parse(result.responseJSON.Events[i].content);
 
+                /**
+                 * Process createEvent message
+                 */
                 if (content.message.action === 'createEvent' && content.message.data.name != null
                     && content.message.data.name != "") {
 
@@ -152,6 +178,22 @@ FriendEventCobra.prototype.fetchDatas = function () {
                         content.message.data.promoter
                     );
                     event.processCreateEvent($this.friendEvent);
+                }
+
+                /**
+                 * Process sendMessage message
+                 */
+                if (content.message.action === 'sendMessage' && content.message.data.message != null
+                    && content.message.data.message != "") {
+
+                    var messageObject = content.message.data;
+
+                    var msg = new Message(
+                        messageObject.sender,
+                        messageObject.message,
+                        messageObject.eventName
+                    );
+                    msg.processSendMessage($this.friendEvent);
                 }
             }
         }

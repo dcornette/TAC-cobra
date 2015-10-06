@@ -7,8 +7,12 @@ function FriendEvent() {
     this.users = [];
     this.events = [];
     this.me = null;
+    this.activeEvent = null;
 }
 
+/**
+ * Init application
+ */
 FriendEvent.prototype.init = function () {
     this.friendEventCobra = new FriendEventCobra();
     this.friendEventCobra.init(this, 'friend-event');
@@ -70,6 +74,18 @@ FriendEvent.prototype.initListeners = function () {
         var event = new Event(eventName, eventDescription, eventWhere, eventWhen, eventWhat, eventWho, $this.me);
 
         $this.friendEventCobra.sendMessage('createEvent', event);
+    });
+
+    /**
+     * Press enter on message input
+     */
+    document.getElementById('messageInput').addEventListener('keypress', function (e) {
+        if (e.keyCode == 13) {
+            var eventName = document.getElementById('myEventName').innerHTML;
+            var message = new Message($this.me, e.target.value, eventName);
+
+            $this.friendEventCobra.sendMessage('sendMessage', message);
+        }
     });
 };
 

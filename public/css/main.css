@@ -49,6 +49,10 @@
 #chat_wrapper .panel input {
     padding: 2px 2px 2px 5px;
 }
+
 #messageInput {
     width: 100%;
 }
+
+.user_name{font-weight:bold;}
+.user_message{color: #88B6E0;}
