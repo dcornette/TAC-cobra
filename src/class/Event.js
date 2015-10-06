@@ -1,4 +1,7 @@
-
+/*
+ * Damien Cornette <damien.cornette@gmail.com>
+ * Sébastien Joly <seb.joly21@gmail.com>
+ */
 function Event(name, description, where, when, what, who, promoter) {
     this.name = name;
     this.description = description;
@@ -11,12 +14,12 @@ function Event(name, description, where, when, what, who, promoter) {
 
 /**
  * Process create Event
- * @param friendEventCobra
+ * @param friendEvent
  */
-Event.prototype.processCreateEvent = function (friendEventCobra) {
+Event.prototype.processCreateEvent = function (friendEvent) {
 
-    if (friendEventCobra.getEventByName(this.name) === null) {
-        friendEventCobra.events.push(this);
+    if (friendEvent.getEventByName(this.name) === null) {
+        friendEvent.events.push(this);
 
         var a = document.createElement('a');
         a.setAttribute('href', '#');
@@ -27,15 +30,15 @@ Event.prototype.processCreateEvent = function (friendEventCobra) {
 
         var leftSidebar = document.getElementById('left-sidebar');
 
-        if (friendEventCobra.me.name === this.promoter.name) {
+        if (friendEvent.me.name === this.promoter.name) {
             leftSidebar.firstElementChild.appendChild(li);
             a.addEventListener('click', function(e) {
 
-                var targetEvent = friendEventCobra.getEventByName(e.target.innerHTML);
+                var targetEvent = friendEvent.getEventByName(e.target.innerHTML);
                 targetEvent.show();
 
-                friendEventCobra.removeActiveClassToLiElement(leftSidebar.firstElementChild);
-                friendEventCobra.removeActiveClassToLiElement(leftSidebar.lastElementChild);
+                friendEvent.removeActiveClassToLiElement(leftSidebar.firstElementChild);
+                friendEvent.removeActiveClassToLiElement(leftSidebar.lastElementChild);
 
                 e.target.parentNode.setAttribute('class', 'active');
             });
@@ -43,11 +46,11 @@ Event.prototype.processCreateEvent = function (friendEventCobra) {
             leftSidebar.lastElementChild.appendChild(li);
             a.addEventListener('click', function(e) {
 
-                var targetEvent = friendEventCobra.getEventByName(e.target.innerHTML);
+                var targetEvent = friendEvent.getEventByName(e.target.innerHTML);
                 targetEvent.show();
 
-                friendEventCobra.removeActiveClassToLiElement(leftSidebar.firstElementChild);
-                friendEventCobra.removeActiveClassToLiElement(leftSidebar.lastElementChild);
+                friendEvent.removeActiveClassToLiElement(leftSidebar.firstElementChild);
+                friendEvent.removeActiveClassToLiElement(leftSidebar.lastElementChild);
 
                 e.target.parentNode.setAttribute('class', 'active');
             });

@@ -1,42 +1,45 @@
-
+/*
+ * Damien Cornette <damien.cornette@gmail.com>
+ * Sébastien Joly <seb.joly21@gmail.com>
+ */
 function User(name) {
     this.name = name;
 }
 
 /**
  * Process create User
- * @param friendEventCobra
+ * @param friendEvent
  */
-User.prototype.processCreateUser = function (friendEventCobra) {
+User.prototype.processCreateUser = function (friendEvent) {
     var $this = this;
 
-    if (friendEventCobra.getUserByName(this.name) === null) {
-        friendEventCobra.users.push(this);
+    if (friendEvent.getUserByName(this.name) === null) {
+        friendEvent.users.push(this);
         var a = document.createElement('a');
         a.setAttribute('href', '#');
         a.setAttribute('class', 'list-group-item');
         a.innerHTML = this.name;
         document.getElementById('userList').appendChild(a);
         a.addEventListener('click', function() {
-            $this.connect(friendEventCobra);
+            $this.connect(friendEvent);
         });
     }
 };
 
 /**
  * Connect user to Friend Event Dashboard
- * @param friendEventCobra
+ * @param friendEvent
  */
-User.prototype.connect = function (friendEventCobra) {
+User.prototype.connect = function (friendEvent) {
     var $this = this;
-    friendEventCobra.me = this;
+    friendEvent.me = this;
 
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('connectedPage').style.display = 'inline';
     document.getElementsByClassName('navbar-brand')[0].innerHTML = 'Hey ' + this.name;
 
     var selectWho = document.getElementById('eventWho');
-    friendEventCobra.users.forEach(function (element, index, array) {
+    friendEvent.users.forEach(function (element, index, array) {
         if (element !== $this) {
             var optWho = document.createElement('option');
             optWho.setAttribute('value', element.name);
@@ -44,29 +47,6 @@ User.prototype.connect = function (friendEventCobra) {
             selectWho.appendChild(optWho);
         }
     });
-
-    document.getElementById('createEvent').addEventListener('click', function(e) {
-        e.preventDefault();
-        var eventName = document.getElementById('eventName').value;
-        var eventDescription = document.getElementById('eventDescription').value;
-        var eventWhere = document.getElementById('eventWhere').value;
-        var eventWhen = document.getElementById('eventWhen').value;
-        var eventWhat = document.getElementById('eventWhat').value;
-
-
-        var selectEventWho = document.getElementById('eventWho').options;
-        var eventWho = [];
-
-        for (var i=0; i<selectEventWho.length; i++) {
-            if (selectEventWho[i].selected) {
-                eventWho.push(selectEventWho[i].value);
-            }
-        }
-
-        var event = new Event(eventName, eventDescription, eventWhere, eventWhen, eventWhat, eventWho, $this);
-        friendEventCobra.cobra.sendMessage({ action : 'createEvent', data : event }, friendEventCobra.room, true);
-    });
-
-    friendEventCobra.fetchDatas();
+    friendEvent.fetchDatas();
 };
 

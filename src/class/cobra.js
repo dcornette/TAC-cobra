@@ -1,5 +1,8 @@
-
-function Cobra(){
+/*
+ * Damien Cornette <damien.cornette@gmail.com>
+ * Sébastien Joly <seb.joly21@gmail.com>
+ */
+function Cobra() {
     this.url = null;
     this.socket = null;
     this.connected = false;

@@ -1,32 +1,21 @@
-
+/*
+ * Damien Cornette <damien.cornette@gmail.com>
+ * Sébastien Joly <seb.joly21@gmail.com>
+ */
 function FriendEventCobra() {
+    this.friendEvent = null;
     this.cobra = null;
     this.room = null;
     this.dataUrl = null;
     this.socketId = null;
-    this.users = [];
-    this.events = [];
-    this.me = null;
-    this.init('friend-event');
-    this.initCobra();
 }
 
-FriendEventCobra.prototype.init = function(roomName) {
-    var $this = this;
-    this.cobra = new Cobra();
+FriendEventCobra.prototype.init = function(friendEvent, roomName) {
+    this.friendEvent = friendEvent;
     this.room = roomName;
     this.dataUrl = 'http://cobra-framework.com:3000/api/events/' + roomName;
-    document.getElementById('createUser').addEventListener('click', function(event) {
-        event.preventDefault();
-        var userName = document.getElementById('username').value;
-        $this.createUser(userName);
-    });
-    document.querySelector('#navbar li').addEventListener('click', function (event) {
-        document.getElementById('createMyEvent').style.display = 'inline';
-        document.getElementById('myEvent').style.display = 'none';
-        $this.removeActiveClassToLiElement(document.getElementById('left-sidebar').firstElementChild);
-        $this.removeActiveClassToLiElement(document.getElementById('left-sidebar').lastElementChild);
-    });
+    this.cobra = new Cobra();
+    this.initCobra();
 };
 
 /**
@@ -34,6 +23,15 @@ FriendEventCobra.prototype.init = function(roomName) {
  */
 FriendEventCobra.prototype.connect = function() {
     this.cobra.connect('http://cobra-framework.com:8080');
+};
+
+/**
+ * Send message to Cobra server
+ * @param actionName
+ * @param data
+ */
+FriendEventCobra.prototype.sendMessage = function (actionName, data) {
+    this.cobra.sendMessage({ action : actionName, data : data }, this.room, true);
 };
 
 /**
@@ -71,7 +69,7 @@ FriendEventCobra.prototype.initCobra = function() {
                     if (content.message.action === 'createUser' && content.message.data.name != null
                         && content.message.data.name != "") {
                         var user = new User(content.message.data.name);
-                        user.processCreateUser($this);
+                        user.processCreateUser($this.friendEvent);
                     }
                 }
             }
@@ -96,7 +94,7 @@ FriendEventCobra.prototype.initCobra = function() {
             if (message.message.action === 'createUser' && message.message.data.name != null
                 && message.message.data.name != "") {
                 var user = new User(message.message.data.name);
-                user.processCreateUser($this);
+                user.processCreateUser($this.friendEvent);
             }
 
             /**
@@ -116,26 +114,11 @@ FriendEventCobra.prototype.initCobra = function() {
                     eventObject.who,
                     eventObject.promoter
                 );
-                event.processCreateEvent($this);
+                event.processCreateEvent($this.friendEvent);
             }
 
         }
     };
-};
-
-/**
- * Create user
- * @param userName
- */
-FriendEventCobra.prototype.createUser = function (userName) {
-
-    if (this.getUserByName(userName) === null) {
-        this.me = new User(userName);
-        this.cobra.sendMessage({ action : 'createUser', data : this.me }, this.room, true);
-        this.me.connect(this);
-    } else {
-        alert('User ' + ' ' + userName + ' already exist !');
-    }
 };
 
 /**
@@ -168,55 +151,11 @@ FriendEventCobra.prototype.fetchDatas = function () {
                         content.message.data.who,
                         content.message.data.promoter
                     );
-                    event.processCreateEvent($this);
+                    event.processCreateEvent($this.friendEvent);
                 }
             }
         }
     });
 };
 
-/**
- * Get event by name, return null if not exist
- * @param eventName
- * @returns {*}
- */
-FriendEventCobra.prototype.getEventByName = function (eventName) {
-    var events = this.events.filter(function (element, index, array) {
-        return element.name === eventName;
-    });
 
-    if (events.length > 0) {
-        return events[0];
-    } else {
-        return null;
-    }
-};
-
-/**
- * Get user by name, return null if not exist
- * @param userName
- * @returns {*}
- */
-FriendEventCobra.prototype.getUserByName = function (userName) {
-    var users = this.users.filter(function (element, index, array) {
-        return element.name === userName;
-    });
-
-    if (users.length > 0) {
-        return users[0];
-    } else {
-        return null;
-    }
-};
-
-/**
- * Remove active class on sidebar links
- * @param ul
- */
-FriendEventCobra.prototype.removeActiveClassToLiElement = function (ul) {
-    for (var i=0; i<ul.children.length; i++) {
-        if (ul.children[i].classList.contains('active')) {
-            ul.children[i].classList.remove('active');
-        }
-    }
-};
