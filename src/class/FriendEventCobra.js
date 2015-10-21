@@ -120,7 +120,7 @@ FriendEventCobra.prototype.initCobra = function() {
                     eventObject.when,
                     eventObject.what,
                     eventObject.who,
-                    eventObject.promoter
+                    new User(eventObject.promoter.name)
                 );
                 event.processCreateEvent($this.friendEvent);
             }
