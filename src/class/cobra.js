@@ -6,7 +6,6 @@ function Cobra() {
     this.url = null;
     this.socket = null;
     this.connected = false;
-    this.roomName = null;
     this.socketId = null;
 }
 
@@ -40,7 +39,6 @@ Cobra.prototype.joinRoom = function(roomName){
     var self = this;
     if(this.connected) {
         this.socket.emit('joinRoom', roomName);
-        this.roomName = roomName;
         self.joinRoomCallback(roomName);
     }
 };

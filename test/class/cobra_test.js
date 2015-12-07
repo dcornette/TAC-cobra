@@ -9,11 +9,21 @@ test("test construct cobra", 4, function( ) {
     ok(cobra.socketId == null, "socketId = null");
 });
 
-test("test connect cobra", function ( ) {
+test("test connect cobra", 5, function ( ) {
     var cobra = new Cobra();
     cobra.connectionCallback = function () {
-        ok(cobra.connected == true, "connected == true");
-        QUnit.start();
+        ok(cobra.connected == true, "connected == ok");
+        cobra.joinRoom('test-friend-event');
+    };
+    cobra.joinRoomCallback = function (roomName) {
+        ok(roomName == "test-friend-event", "joinedRoom == ok");
+        cobra.sendMessage("Test cobra", roomName, true);
+    };
+    cobra.messageReceivedCallback = function (message) {
+        if (message.type != 'infos') {
+            ok(message.message == "Test cobra", "messagesReceived == ok");
+            QUnit.start();
+        }
     };
     cobra.connect('http://cobra-framework.com:8080');
     QUnit.stop();
