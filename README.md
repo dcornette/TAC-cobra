@@ -13,3 +13,7 @@ Go to [NodeJs Website !](https://nodejs.org/en/download/)
 To your root project :
 
 `bower install`
+
+## Tests
+
+
