@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:63342/" />
+<title>test_display_my_event</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">test_display_my_event</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/tac_projet/index.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sebastien</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sebastien</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Soirée entre binome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Soirée entre binome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=myEventName</td>
+	<td>Soirée entre binome</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=myEventDescription</td>
+	<td>Au programme projet JS et tests pour OTI</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=myEventWhere</td>
+	<td>Lille</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=myEventWhen</td>
+	<td>Demain</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=myEventWhat</td>
+	<td>Saucisson et bières</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#myEventWho &gt; ul &gt; li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=messageInput</td>
+	<td>N'oublie pas ton pc Damien ;)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.user_name</td>
+	<td>Sebastien</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.user_message</td>
+	<td>N'oublie pas ton pc Damien ;)</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

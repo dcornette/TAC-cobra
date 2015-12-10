@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:63342/" />
+<title>test_create_new_event</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">test_create_new_event</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/tac_projet/index.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sebastien</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sebastien</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Soirée entre binome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=eventName</td>
+	<td>Soirée entre binome</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=eventDescription</td>
+	<td>Au programme projet JS et tests pour OTI</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=eventWhere</td>
+	<td>Lille</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=eventWhen</td>
+	<td>Demain</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=eventWhat</td>
+	<td>Saucisson et bières</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=eventWho</td>
+	<td>label=Damien</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createEvent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Soirée entre binome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Soirée entre binome</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

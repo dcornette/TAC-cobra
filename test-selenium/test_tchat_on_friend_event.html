@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:63342/" />
+<title>test_chat</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">test_chat</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/tac_projet/index.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Damien</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Damien</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Soirée entre binome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Soirée entre binome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Soirée entre binome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=myEventName</td>
+	<td>Soirée entre binome</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='message_box']/div[1]/span</td>
+	<td>Sebastien</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='message_box']/div[1]/span[2]</td>
+	<td>N'oublie pas ton pc Damien ;)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=messageInput</td>
+	<td>Oui j'ai déjà tout préparé et j'ai même le saucisson :P</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='message_box']/div[2]/span</td>
+	<td>Damien</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='message_box']/div[2]/span[2]</td>
+	<td>Oui j'ai déjà tout préparé et j'ai même le saucisson :P</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
