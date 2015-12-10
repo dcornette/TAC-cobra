@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite name="Chrome_470252673_Mac_OS.cobra" errors="1" failures="0" tests="2" time="0.005">
-<testcase classname="Chrome_470252673_Mac_OS.cobra" name="test test construct cobra" time="0.002"/>
-<testcase classname="Chrome_470252673_Mac_OS.cobra" name="test test connect cobra" time="0.003">
-<error type="error">[{"message":"io is not defined","name":"ReferenceError","stack":"ReferenceError: io is not defined\n    at Cobra.connect (http://localhost:9876/test/src/class/cobra.js:15:34)\n    at Object.&lt;anonymous&gt; (http://localhost:9876/test/test/cobra_test.js:28:26)\n    at QUnitTestCase.(anonymous function) [as test test connect cobra] (http://localhost:9876/test/JSTDQUA/QUnitAdapter.js:47:37)\n    at jstestdriver.plugins.TestRunnerPlugin.runTest (http://localhost:9876/static/runner.js:5403:33)\n    at TestResultIterator.runTest (http://localhost:9876/test/com/google/jstestdriver/coverage/javascript/LCOV.js:201:28)\n    at TestResultIterator.runNext (http://localhost:9876/test/com/google/jstestdriver/coverage/javascript/LCOV.js:292:10)\n    at InstrumentedTestCaseRunner.run (http://localhost:9876/test/com/google/jstestdriver/coverage/javascript/LCOV.js:250:27)\n    at bound (http://localhost:9876/static/jstestdrivernamespace.js:71:17)"}]</error>
-</testcase>
-</testsuite>
