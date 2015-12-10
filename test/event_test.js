@@ -1,4 +1,4 @@
-module("cobra", {
+module("event", {
 });
 
 test("test construct event", 7, function( ) {

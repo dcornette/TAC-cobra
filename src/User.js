@@ -39,7 +39,7 @@ User.prototype.connect = function (friendEvent) {
     document.getElementsByClassName('navbar-brand')[0].innerHTML = 'Hey ' + this.name;
 
     var selectWho = document.getElementById('eventWho');
-    friendEvent.users.forEach(function (element, index, array) {
+    friendEvent.users.forEach(function (element) {
         if (element !== $this) {
             var optWho = document.createElement('option');
             optWho.setAttribute('value', element.name);

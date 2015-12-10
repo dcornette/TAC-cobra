@@ -19,7 +19,8 @@ module.exports=function(grunt){
                         'http://127.0.0.1:<%= connect.testcoverage.options.port %>/test/event_test.html',
                         'http://127.0.0.1:<%= connect.testcoverage.options.port %>/test/user_test.html',
                         'http://127.0.0.1:<%= connect.testcoverage.options.port %>/test/message_test.html',
-                        'http://127.0.0.1:<%= connect.testcoverage.options.port %>/test/friend_event_cobra_test.html']
+                        'http://127.0.0.1:<%= connect.testcoverage.options.port %>/test/friend_event_cobra_test.html',
+                        'http://127.0.0.1:<%= connect.testcoverage.options.port %>/test/friend_event_test.html']
                 }
             }
         },

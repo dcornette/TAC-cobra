@@ -110,7 +110,7 @@ FriendEvent.prototype.createUser = function (userName) {
  * @returns {*}
  */
 FriendEvent.prototype.getEventByName = function (eventName) {
-    var events = this.events.filter(function (element, index, array) {
+    var events = this.events.filter(function (element) {
         return element.name === eventName;
     });
 
@@ -127,7 +127,7 @@ FriendEvent.prototype.getEventByName = function (eventName) {
  * @returns {*}
  */
 FriendEvent.prototype.getUserByName = function (userName) {
-    var users = this.users.filter(function (element, index, array) {
+    var users = this.users.filter(function (element) {
         return element.name === userName;
     });
 

@@ -7,7 +7,6 @@ function FriendEventCobra() {
     this.cobra = null;
     this.room = null;
     this.dataUrl = null;
-    this.socketId = null;
 }
 
 /**
@@ -56,7 +55,7 @@ FriendEventCobra.prototype.initCobra = function() {
      * Join room callback
      * @param roomName
      */
-    this.cobra.joinRoomCallback = function (roomName) {
+    this.cobra.joinRoomCallback = function () {
 
         // appel à l'API pour récupérer tous les messages de la room roomName
         $.ajax({
@@ -67,7 +66,7 @@ FriendEventCobra.prototype.initCobra = function() {
                 console.log("error when retrieve events");
             },
 
-            complete: function (result, status) {
+            complete: function (result) {
                 for (var i = 0; i < result.responseJSON.Events.length; i++) {
                     var content = JSON.parse(result.responseJSON.Events[i].content);
 
@@ -90,11 +89,7 @@ FriendEventCobra.prototype.initCobra = function() {
      */
     this.cobra.messageReceivedCallback = function (message) {
 
-        // Lors de l'arrivée dans une room donne la liste des utilisateurs contenus dans la room
-        if(message.type == "infos") {
-            for(var i = 0; i < message.clients.length; i++) {var client = message.clients[i];}
-            $this.socketId = message.socketId;
-        } else if (message.message) {
+        if (message.message) {
 
             /**
              * Process createUser message
